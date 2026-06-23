@@ -1,0 +1,26 @@
+# Build outputs
+bin/
+*.exe
+*.out
+*.test
+
+# Dependencies
+vendor/
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.bak
+
+# Logs and temp
+*.log
+*.tmp
+
+# Coverage
+coverage.out
+
+# macOS
+.DS_Store
+
+.env
