@@ -3,9 +3,10 @@ package config
 import (
 	"log"
 
-	"github.com/SuperB1aze/catalog-service/internal/app/config/section"
 	"github.com/joho/godotenv"
 	"github.com/kelseyhightower/envconfig"
+
+	"github.com/SuperB1aze/catalog-service/internal/app/config/section"
 )
 
 type Config struct {
@@ -18,10 +19,10 @@ type Config struct {
 var Root Config
 
 // Load загружает конфигурацию из .env файла и переменных окружения
-func Load(Root *Config) error {
+func Load(root *Config) error {
 	_ = godotenv.Load(".env")
 
-	if err := envconfig.Process("APP", Root); err != nil {
+	if err := envconfig.Process("APP", root); err != nil {
 		log.Fatal("Error processing env config: ", err)
 	}
 
