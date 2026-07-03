@@ -19,12 +19,10 @@ type Config struct {
 var Root Config
 
 // Load загружает конфигурацию из .env файла и переменных окружения
-func Load(root *Config) error {
+func Load() {
 	_ = godotenv.Load(".env")
 
-	if err := envconfig.Process("APP", root); err != nil {
+	if err := envconfig.Process("APP", &Root); err != nil {
 		log.Fatal("Error processing env config: ", err)
 	}
-
-	return nil
 }

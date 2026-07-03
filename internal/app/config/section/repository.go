@@ -1,6 +1,6 @@
 package section
 
-import "github.com/SuperB1aze/catalog-service/internal/app/util"
+import "time"
 
 type (
 	Repository struct {
@@ -12,7 +12,7 @@ type (
 		Username     string        `required:"true" split_words:"true"`
 		Password     string        `required:"true" split_words:"true"`
 		Name         string        `required:"true" split_words:"true"`
-		ReadTimeout  util.Duration `default:"5s" split_words:"true"`
-		WriteTimeout util.Duration `default:"5s" split_words:"true"`
+		ReadTimeout  time.Duration `default:"5s" split_words:"true"`
+		WriteTimeout time.Duration `default:"5s" split_words:"true"`
 	}
 )
