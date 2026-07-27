@@ -73,6 +73,7 @@ func (h *handler) Update(w http.ResponseWriter, r *http.Request) {
 		GUID:      category.GUID,
 		Name:      category.Name,
 		CreatedAt: category.CreatedAt,
+		UpdatedAt: category.UpdatedAt,
 	}
 
 	httph.SendJSON(w, http.StatusOK, resp)
