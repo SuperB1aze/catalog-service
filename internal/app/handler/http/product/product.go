@@ -3,13 +3,13 @@ package hproduct
 import (
 	"net/http"
 
-	"github.com/SuperB1aze/catalog-service/internal/pkg/http/binding"
 	"github.com/gofrs/uuid"
 	"github.com/gorilla/mux"
 
 	"github.com/SuperB1aze/catalog-service/internal/app/entity"
 	rhandler "github.com/SuperB1aze/catalog-service/internal/app/handler/http"
 	"github.com/SuperB1aze/catalog-service/internal/app/service"
+	"github.com/SuperB1aze/catalog-service/internal/pkg/http/binding"
 	"github.com/SuperB1aze/catalog-service/internal/pkg/http/httph"
 )
 
