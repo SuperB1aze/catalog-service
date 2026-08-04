@@ -1,9 +1,9 @@
 package hcategory
 
 import (
-	"encoding/json"
 	"net/http"
 
+	"github.com/SuperB1aze/catalog-service/internal/pkg/http/binding"
 	"github.com/gofrs/uuid"
 	"github.com/gorilla/mux"
 
@@ -19,12 +19,8 @@ type handler struct {
 
 func (h *handler) Create(w http.ResponseWriter, r *http.Request) {
 	var req entity.RequestCategoryCreate
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		httph.HandleError(w, entity.ErrIncorrectParameters)
-		return
-	}
 
-	if err := req.Validate(); err != nil {
+	if err := binding.ScanAndValidateJSON(r, &req); err != nil {
 		httph.HandleError(w, err)
 		return
 	}
@@ -46,12 +42,8 @@ func (h *handler) Create(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) Update(w http.ResponseWriter, r *http.Request) {
 	var req entity.RequestCategoryUpdate
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		httph.HandleError(w, entity.ErrIncorrectParameters)
-		return
-	}
 
-	if err := req.Validate(); err != nil {
+	if err := binding.ScanAndValidateJSON(r, &req); err != nil {
 		httph.HandleError(w, err)
 		return
 	}
