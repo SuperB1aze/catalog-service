@@ -1,9 +1,6 @@
 package hproduct
 
 import (
-	"encoding/json"
-	"errors"
-	"io"
 	"net/http"
 
 	"github.com/gofrs/uuid"
@@ -12,6 +9,7 @@ import (
 	"github.com/SuperB1aze/catalog-service/internal/app/entity"
 	rhandler "github.com/SuperB1aze/catalog-service/internal/app/handler/http"
 	"github.com/SuperB1aze/catalog-service/internal/app/service"
+	"github.com/SuperB1aze/catalog-service/internal/pkg/http/binding"
 	"github.com/SuperB1aze/catalog-service/internal/pkg/http/httph"
 )
 
@@ -21,12 +19,7 @@ type handler struct {
 
 func (h *handler) Create(w http.ResponseWriter, r *http.Request) {
 	var req entity.RequestProductCreate
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		httph.HandleError(w, entity.ErrIncorrectParameters)
-		return
-	}
-
-	if err := req.Validate(); err != nil {
+	if err := binding.ScanAndValidateJSON(r, &req); err != nil {
 		httph.HandleError(w, err)
 		return
 	}
@@ -51,12 +44,7 @@ func (h *handler) Create(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) Update(w http.ResponseWriter, r *http.Request) {
 	var req entity.RequestProductUpdate
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		httph.HandleError(w, entity.ErrIncorrectParameters)
-		return
-	}
-
-	if err := req.Validate(); err != nil {
+	if err := binding.ScanAndValidateJSON(r, &req); err != nil {
 		httph.HandleError(w, err)
 		return
 	}
@@ -105,8 +93,8 @@ func (h *handler) Delete(w http.ResponseWriter, r *http.Request) {
 
 func (h *handler) List(w http.ResponseWriter, r *http.Request) {
 	var req entity.RequestProductList
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil && !errors.Is(err, io.EOF) {
-		httph.HandleError(w, entity.ErrIncorrectParameters)
+	if err := binding.ScanAndValidateJSON(r, &req); err != nil {
+		httph.HandleError(w, err)
 		return
 	}
 
